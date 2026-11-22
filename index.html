@@ -3,61 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TradeMaster Academy | Professional Trading Education</title>
+<title>TradeMaster Academy | Best Trading Course</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #05080f;
-  --card: #0f1520;
-  --border: #1e293b;
-  --primary: #22c55e;
-  --primary-dark: #16a34a;
-  --text: #f8fafc;
-  --muted: #94a3b8;
-  --accent: #f59e0b;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height:1.6; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-header { background: rgba(5,8,15,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top:0; z-index:100; }
-nav { display:flex; justify-content:space-between; align-items:center; height:72px; }
-.logo { font-size:1.6rem; font-weight:800; color: var(--primary); letter-spacing:-0.5px; }
-.logo span { color: var(--text); }
-nav a { color: var(--muted); text-decoration:none; margin-left:32px; font-weight:500; transition:0.2s; }
-nav a:hover { color: var(--text); }
-.btn { background: var(--primary); color:#000; padding:12px 28px; border-radius:10px; font-weight:600; text-decoration:none; display:inline-block; transition:0.2s; border:none; cursor:pointer; font-size:0.95rem; }
-.btn:hover { background: var(--primary-dark); transform:translateY(-1px); }
-.btn-outline { background:transparent; border:1px solid var(--border); color:var(--text); }
-.hero { padding:120px 0 100px; text-align:center; background: radial-gradient(ellipse at top, #0f2a1a 0%, transparent 60%); }
-.badge { display:inline-block; background:rgba(34,197,94,0.15); color:var(--primary); padding:6px 16px; border-radius:100px; font-size:0.85rem; font-weight:600; margin-bottom:20px; }
-.hero h1 { font-size:4rem; font-weight:800; margin-bottom:20px; line-height:1.05; letter-spacing:-1px; }
-.hero h1 span { color: var(--primary); }
-.hero p { font-size:1.3rem; color: var(--muted); max-width:640px; margin:0 auto 36px; }
-.stats { display:flex; justify-content:center; gap:48px; margin-top:60px; flex-wrap:wrap; }
-.stat { text-align:center; }
-.stat strong { display:block; font-size:2rem; font-weight:800; color:var(--primary); }
-.stat span { color:var(--muted); font-size:0.9rem; }
-.section { padding:100px 0; }
-.section-title { font-size:2.6rem; font-weight:800; margin-bottom:12px; text-align:center; letter-spacing:-0.5px; }
-.section-sub { text-align:center; color:var(--muted); margin-bottom:56px; max-width:600px; margin-left:auto; margin-right:auto; }
-.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px,1fr)); gap:28px; }
-.card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:32px; transition:0.3s; }
-.card:hover { border-color:var(--primary); transform:translateY(-6px); }
-.card h3 { font-size:1.5rem; margin-bottom:10px; }
-.price { font-size:2.2rem; font-weight:800; color:var(--primary); margin:16px 0; }
-.price span { font-size:1rem; color:var(--muted); font-weight:400; }
-.features { list-style:none; margin:20px 0; }
-.features li { padding:8px 0; color:var(--muted); }
-.features li:before { content:"\2713 "; color:var(--primary); font-weight:bold; }
-.access-box { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:48px; max-width:520px; margin:48px auto; text-align:center; }
-.access-box input { width:100%; padding:16px; border-radius:10px; border:1px solid var(--border); background:#0a1018; color:var(--text); font-size:1rem; margin:20px 0; }
-.video-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(360px,1fr)); gap:28px; margin-top:40px; }
-.video-card { background:var(--card); border-radius:16px; overflow:hidden; border:1px solid var(--border); }
-.video-card video { width:100%; height:220px; background:#000; }
-.video-info { padding:20px; }
-footer { border-top:1px solid var(--border); padding:60px 0; text-align:center; color:var(--muted); }
-.hidden { display:none !important; }
-@media (max-width:768px) { .hero h1 { font-size:2.6rem; } .stats { gap:24px; } nav a { display:none; } }
+:root{--bg:#05080f;--card:#0c1220;--border:#1e293b;--primary:#22c55e;--text:#f8fafc;--muted:#94a3b8;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+header{background:rgba(5,8,15,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+nav{display:flex;justify-content:space-between;align-items:center;height:70px}
+.logo{font-size:1.5rem;font-weight:800;color:var(--primary)}
+.logo span{color:var(--text)}
+nav a{color:var(--muted);text-decoration:none;margin-left:28px;font-weight:500}
+nav a:hover{color:#fff}
+.btn{background:var(--primary);color:#000;padding:12px 26px;border-radius:10px;font-weight:600;text-decoration:none;display:inline-block;border:none;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}
+.hero{padding:110px 0 90px;text-align:center;background:radial-gradient(ellipse at top,#0f2918 0%,transparent 55%)}
+.badge{background:rgba(34,197,94,.15);color:var(--primary);padding:6px 14px;border-radius:100px;font-size:.85rem;font-weight:600;display:inline-block;margin-bottom:18px}
+.hero h1{font-size:3.8rem;font-weight:800;line-height:1.05;margin-bottom:16px}
+.hero h1 span{color:var(--primary)}
+.hero p{font-size:1.25rem;color:var(--muted);max-width:620px;margin:0 auto 32px}
+.stats{display:flex;justify-content:center;gap:40px;margin-top:50px;flex-wrap:wrap}
+.stat strong{font-size:1.9rem;color:var(--primary);display:block}
+.stat span{color:var(--muted);font-size:.9rem}
+.section{padding:90px 0}
+.section-title{font-size:2.4rem;font-weight:800;text-align:center;margin-bottom:10px}
+.section-sub{text-align:center;color:var(--muted);margin-bottom:50px;max-width:580px;margin-left:auto;margin-right:auto}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.why-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center}
+.why-card h3{margin:12px 0 8px}
+.course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px}
+.card:hover{border-color:var(--primary)}
+.price{font-size:2rem;font-weight:800;color:var(--primary);margin:12px 0}
+.features{list-style:none;margin:16px 0}
+.features li{padding:6px 0;color:var(--muted)}
+.features li:before{content:"\2713 ";color:var(--primary)}
+.access-box{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:40px;max-width:480px;margin:40px auto;text-align:center}
+.access-box input{width:100%;padding:14px;border-radius:8px;border:1px solid var(--border);background:#0a1018;color:#fff;margin:16px 0}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px}
+.video-card{background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.video-card video{width:100%;height:200px;background:#000}
+.video-info{padding:16px}
+footer{border-top:1px solid var(--border);padding:50px 0;text-align:center;color:var(--muted)}
+.hidden{display:none!important}
+@media(max-width:768px){.hero h1{font-size:2.5rem}nav a{display:none}}
 </style>
 </head>
 <body>
@@ -67,6 +57,7 @@ footer { border-top:1px solid var(--border); padding:60px 0; text-align:center; 
       <div class="logo">Trade<span>Master</span></div>
       <div>
         <a href="#courses">Courses</a>
+        <a href="#why">Why Us</a>
         <a href="#access">Access</a>
         <a href="#videos" id="navVideos" class="hidden">My Videos</a>
       </div>
@@ -77,13 +68,26 @@ footer { border-top:1px solid var(--border); padding:60px 0; text-align:center; 
 <section class="hero">
   <div class="container">
     <div class="badge">#1 Rated Trading Academy</div>
-    <h1>Master Trading <span>Professionally</span></h1>
-    <p>Learn Forex, Stocks, Options & Crypto with expert-led courses. Join thousands of successful traders.</p>
+    <h1>Best Trading Course <span>for Serious Traders</span></h1>
+    <p>Master Forex, Stocks, Options & Crypto with expert mentors. 7K+ students trained.</p>
     <a href="#courses" class="btn">Explore Courses</a>
     <div class="stats">
       <div class="stat"><strong>7K+</strong><span>Students Trained</span></div>
       <div class="stat"><strong>20+</strong><span>Expert Mentors</span></div>
-      <div class="stat"><strong>4.9</strong><span>Google Rating</span></div>
+      <div class="stat"><strong>4.9\u2605</strong><span>Google Rating</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="section">
+  <div class="container">
+    <h2 class="section-title">Why Choose TradeMaster</h2>
+    <p class="section-sub">Expert guidance to help you trade with confidence.</p>
+    <div class="why-grid">
+      <div class="why-card"><h3>Proven Results</h3><p>Thousands of students now trading full-time.</p></div>
+      <div class="why-card"><h3>Expert Mentors</h3><p>Learn from experienced market professionals.</p></div>
+      <div class="why-card"><h3>Flexible Learning</h3><p>Online videos + live sessions at your pace.</p></div>
+      <div class="why-card"><h3>Community</h3><p>Join a strong network of active traders.</p></div>
     </div>
   </div>
 </section>
@@ -91,41 +95,41 @@ footer { border-top:1px solid var(--border); padding:60px 0; text-align:center; 
 <section id="courses" class="section">
   <div class="container">
     <h2 class="section-title">Our Trading Courses</h2>
-    <p class="section-sub">Pay to enroll, then unlock premium video lessons with your access code. Prices in INR & USDT.</p>
-    <div class="grid">
+    <p class="section-sub">Enroll with Razorpay. Unlock videos using your access code. Prices in INR & USDT.</p>
+    <div class="course-grid">
       <div class="card">
         <h3>Beginner Trading Masterclass</h3>
-        <p>From market basics to your first profitable trade.</p>
-        <div class="price">\u20b91,999 <span>/ one-time</span></div>
+        <p>From basics to your first trade.</p>
+        <div class="price">\u20b91,999</div>
         <ul class="features">
-          <li>Market Structure & Charts</li>
+          <li>Market Structure</li>
           <li>Candlestick Patterns</li>
           <li>Risk Management</li>
-          <li>15+ Video Lessons</li>
+          <li>15+ Videos</li>
         </ul>
         <button class="btn" onclick="showPayment('BEGINNER')">Enroll Now</button>
       </div>
       <div class="card">
         <h3>Options Trading Pro</h3>
-        <p>Call, Put, strategies and live market analysis.</p>
-        <div class="price">\u20b94,999 <span>/ one-time</span></div>
+        <p>Strategies & live analysis.</p>
+        <div class="price">\u20b94,999</div>
         <ul class="features">
           <li>Options Greeks</li>
           <li>Spread Strategies</li>
-          <li>Weekly Income Techniques</li>
-          <li>25+ Video Lessons</li>
+          <li>Weekly Income</li>
+          <li>25+ Videos</li>
         </ul>
         <button class="btn" onclick="showPayment('OPTIONS')">Enroll Now</button>
       </div>
       <div class="card">
         <h3>Intraday & Scalping</h3>
-        <p>Fast execution techniques with live examples.</p>
-        <div class="price">\u20b93,499 <span>/ one-time</span></div>
+        <p>Fast trading techniques.</p>
+        <div class="price">\u20b93,499</div>
         <ul class="features">
           <li>Price Action</li>
           <li>Volume Analysis</li>
-          <li>Live Trade Recordings</li>
-          <li>20+ Video Lessons</li>
+          <li>Live Recordings</li>
+          <li>20+ Videos</li>
         </ul>
         <button class="btn" onclick="showPayment('INTRADAY')">Enroll Now</button>
       </div>
@@ -136,12 +140,12 @@ footer { border-top:1px solid var(--border); padding:60px 0; text-align:center; 
 <section id="access" class="section">
   <div class="container">
     <h2 class="section-title">Access Your Videos</h2>
-    <p class="section-sub">Enter the access code received after payment. Videos unlock instantly.</p>
+    <p class="section-sub">Enter the code you get after payment.</p>
     <div class="access-box">
       <h3>Enter Access Code</h3>
-      <input type="text" id="accessCode" placeholder="e.g. TRADE-XXXX" />
+      <input type="text" id="accessCode" placeholder="TRADE-XXXX" />
       <button class="btn" onclick="unlockVideos()">Unlock Videos</button>
-      <p id="accessMsg" style="margin-top:16px; color:var(--accent);"></p>
+      <p id="accessMsg" style="margin-top:12px"></p>
     </div>
   </div>
 </section>
@@ -149,137 +153,55 @@ footer { border-top:1px solid var(--border); padding:60px 0; text-align:center; 
 <section id="videos" class="section hidden">
   <div class="container">
     <h2 class="section-title">Your Course Videos</h2>
-    <p class="section-sub">Premium content available only after successful payment.</p>
     <div id="videoContainer" class="video-grid"></div>
   </div>
 </section>
 
 <footer>
   <div class="container">
-    <p>\u00a9 2026 TradeMaster Academy. All rights reserved.</p>
-    <p style="margin-top:10px; font-size:0.9rem;">Educational content only. Trading involves risk. Past performance is not indicative of future results.</p>
+    <p>\u00a9 2026 TradeMaster Academy. Educational content only. Trading involves risk.</p>
   </div>
 </footer>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 const RAZORPAY_KEY_ID = "rzp_test_YOUR_KEY_HERE";
-
 const COURSES = {
   BEGINNER: { name: "Beginner Trading Masterclass", amount: 199900, code: "TRADE-BEGINNER" },
   OPTIONS:  { name: "Options Trading Pro", amount: 499900, code: "TRADE-OPTIONS" },
   INTRADAY: { name: "Intraday & Scalping", amount: 349900, code: "TRADE-INTRADAY" }
 };
-
-const VALID_CODES = {
-  "TRADE-BEGINNER": "beginner",
-  "TRADE-OPTIONS": "options",
-  "TRADE-INTRADAY": "intraday",
-  "TRADE-MASTER": "all"
-};
-
+const VALID_CODES = { "TRADE-BEGINNER":"beginner", "TRADE-OPTIONS":"options", "TRADE-INTRADAY":"intraday", "TRADE-MASTER":"all" };
 const VIDEOS = {
-  beginner: [
-    { title: "Introduction to Stock Market", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "How the market works" },
-    { title: "How to Read Charts", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Candlesticks and patterns" }
-  ],
-  options: [
-    { title: "What are Options?", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Understand Call and Put" },
-    { title: "Basic Strategies", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Covered Call, Protective Put" }
-  ],
-  intraday: [
-    { title: "Intraday Basics", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Same day trading" },
-    { title: "Scalping Techniques", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Fast entries & exits" }
-  ]
+  beginner: [{title:"Introduction to Stock Market",url:"https://www.w3schools.com/html/mov_bbb.mp4",desc:"How the market works"}],
+  options: [{title:"What are Options?",url:"https://www.w3schools.com/html/mov_bbb.mp4",desc:"Call and Put"}],
+  intraday: [{title:"Intraday Basics",url:"https://www.w3schools.com/html/mov_bbb.mp4",desc:"Same day trading"}]
 };
-
-function getAllVideos(course) {
-  const defaultVideos = VIDEOS[course] || [];
-  const stored = JSON.parse(localStorage.getItem("trademaster_videos") || "{}");
-  const custom = stored[course] || [];
-  return [...defaultVideos, ...custom];
+function getAllVideos(c){const s=JSON.parse(localStorage.getItem("trademaster_videos")||"{}");return [...(VIDEOS[c]||[]),...(s[c]||[])]}
+function showPayment(k){
+  const c=COURSES[k];
+  if(RAZORPAY_KEY_ID.includes("YOUR_KEY")){alert("Add your Razorpay Key ID\nDemo code: "+c.code);document.getElementById("accessCode").value=c.code;return}
+  new Razorpay({key:RAZORPAY_KEY_ID,amount:c.amount,currency:"INR",name:"TradeMaster Academy",description:c.name,handler:()=>{alert("Success! Code: "+c.code);document.getElementById("accessCode").value=c.code;unlockVideos()},theme:{color:"#22c55e"}}).open()
 }
-
-function showPayment(courseKey) {
-  const course = COURSES[courseKey];
-  if (!course) return;
-
-  if (RAZORPAY_KEY_ID.includes("YOUR_KEY")) {
-    alert("Razorpay Key ID is not set.\n\n1. Copy Key ID from Razorpay Dashboard\n2. Update RAZORPAY_KEY_ID in index.html\n\nDemo code: " + course.code);
-    document.getElementById("accessCode").value = course.code;
-    return;
-  }
-
-  const options = {
-    key: RAZORPAY_KEY_ID,
-    amount: course.amount,
-    currency: "INR",
-    name: "TradeMaster Academy",
-    description: course.name,
-    handler: function (response) {
-      alert("Payment Successful!\n\nAccess Code: " + course.code);
-      document.getElementById("accessCode").value = course.code;
-      unlockVideos();
-    },
-    theme: { color: "#22c55e" }
-  };
-
-  const rzp = new Razorpay(options);
-  rzp.open();
-}
-
-function unlockVideos() {
-  const code = document.getElementById("accessCode").value.trim().toUpperCase();
-  const msg = document.getElementById("accessMsg");
-  const course = VALID_CODES[code];
-
-  if (!course) {
-    msg.textContent = "Invalid code. Please enter the correct code after payment.";
-    msg.style.color = "#ef4444";
-    return;
-  }
-
-  msg.textContent = "Access granted! Loading your videos...";
-  msg.style.color = "#22c55e";
-
+function unlockVideos(){
+  const code=document.getElementById("accessCode").value.trim().toUpperCase();
+  const course=VALID_CODES[code];
+  const msg=document.getElementById("accessMsg");
+  if(!course){msg.textContent="Invalid code";msg.style.color="#ef4444";return}
+  msg.textContent="Access granted";msg.style.color="#22c55e";
   document.getElementById("videos").classList.remove("hidden");
   document.getElementById("navVideos").classList.remove("hidden");
-  document.getElementById("videos").scrollIntoView({ behavior: "smooth" });
-
-  const container = document.getElementById("videoContainer");
-  container.innerHTML = "";
-
-  let list = course === "all" 
-    ? [...getAllVideos("beginner"), ...getAllVideos("options"), ...getAllVideos("intraday")]
-    : getAllVideos(course);
-
-  list.forEach(v => {
-    const card = document.createElement("div");
-    card.className = "video-card";
-    const priceText = v.price ? `\u20b9${v.price}` : "";
-    const usdtText = v.priceUsdt ? ` / ${v.priceUsdt} USDT` : "";
-    const displayPrice = (priceText || usdtText) ? (priceText + usdtText) : "Included";
-    card.innerHTML = `
-      <video controls><source src="${v.url}" type="video/mp4"></video>
-      <div class="video-info">
-        <h4>${v.title}</h4>
-        <p style="color:var(--muted); font-size:0.9rem;">${v.desc || ""}</p>
-        <p style="margin-top:8px; font-weight:600; color:var(--primary);">${displayPrice}</p>
-      </div>
-    `;
-    container.appendChild(card);
+  const cont=document.getElementById("videoContainer");cont.innerHTML="";
+  const list=course==="all"?[...getAllVideos("beginner"),...getAllVideos("options"),...getAllVideos("intraday")]:getAllVideos(course);
+  list.forEach(v=>{
+    const d=document.createElement("div");d.className="video-card";
+    const p=v.price?`\u20b9${v.price}`:"";const u=v.priceUsdt?` / ${v.priceUsdt} USDT`:"";
+    d.innerHTML=`<video controls><source src="${v.url}"></video><div class="video-info"><h4>${v.title}</h4><p style="color:var(--muted)">${v.desc||""}</p><p style="color:var(--primary);font-weight:600;margin-top:6px">${p+u||"Included"}</p></div>`;
+    cont.appendChild(d);
   });
-
-  localStorage.setItem("tradeAccess", code);
+  localStorage.setItem("tradeAccess",code);
 }
-
-window.onload = () => {
-  const saved = localStorage.getItem("tradeAccess");
-  if (saved && VALID_CODES[saved]) {
-    document.getElementById("accessCode").value = saved;
-    unlockVideos();
-  }
-};
+window.onload=()=>{const s=localStorage.getItem("tradeAccess");if(s&&VALID_CODES[s]){document.getElementById("accessCode").value=s;unlockVideos()}}
 </script>
 </body>
 </html>
