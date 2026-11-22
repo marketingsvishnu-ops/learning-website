@@ -151,6 +151,19 @@ footer { border-top:1px solid var(--border); padding:60px 0; text-align:center; 
   </div>
 </section>
 
+<section class="section" style="background:#080e1a">
+  <div class="container">
+    <h2 class="section-title">Live Market</h2>
+    <p class="section-sub">Real-time price stream + TradingView chart</p>
+    <div style="text-align:center;margin-bottom:40px">
+      <div style="font-size:1.2rem;color:var(--muted)">BTC/USDT</div>
+      <div id="btcPrice" style="font-size:3rem;font-weight:900;color:var(--primary)">Loading...</div>
+      <div id="btcChange" style="font-size:1.2rem"></div>
+    </div>
+    <div id="tradingview_chart" style="height:520px;border-radius:16px;overflow:hidden"></div>
+  </div>
+</section>
+
 <section id="access" class="section">
   <div class="container">
     <h2 class="section-title">Unlock Your Videos</h2>
@@ -178,6 +191,7 @@ footer { border-top:1px solid var(--border); padding:60px 0; text-align:center; 
 </footer>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script>
 const RAZORPAY_KEY_ID = "rzp_test_YOUR_KEY_HERE";
 const COURSES = {
@@ -215,6 +229,34 @@ function unlockVideos(){
   });
   localStorage.setItem("tradeAccess",code);
 }
+
+// Live WebSocket Price
+const ws = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@ticker");
+ws.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+  const price = parseFloat(data.c).toFixed(2);
+  const change = parseFloat(data.P).toFixed(2);
+  document.getElementById("btcPrice").textContent = "$" + price;
+  document.getElementById("btcChange").textContent = change + "%";
+  document.getElementById("btcChange").style.color = change >= 0 ? "#00d26a" : "#ef4444";
+};
+
+// TradingView Chart
+new TradingView.widget({
+  "autosize": true,
+  "symbol": "BINANCE:BTCUSDT",
+  "interval": "15",
+  "timezone": "Asia/Kolkata",
+  "theme": "dark",
+  "style": "1",
+  "locale": "en",
+  "toolbar_bg": "#121a2b",
+  "enable_publishing": false,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": true,
+  "container_id": "tradingview_chart"
+});
+
 window.onload=()=>{const s=localStorage.getItem("tradeAccess");if(s&&VALID_CODES[s]){document.getElementById("accessCode").value=s;unlockVideos()}}
 </script>
 </body>
