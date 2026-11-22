@@ -181,6 +181,13 @@ const VIDEOS = {
   ]
 };
 
+function getAllVideos(course) {
+  const defaultVideos = VIDEOS[course] || [];
+  const stored = JSON.parse(localStorage.getItem("trademaster_videos") || "{}");
+  const custom = stored[course] || [];
+  return [...defaultVideos, ...custom];
+}
+
 function showPayment(courseKey) {
   const course = COURSES[courseKey];
   if (!course) return;
@@ -236,7 +243,12 @@ function unlockVideos() {
   const container = document.getElementById("videoContainer");
   container.innerHTML = "";
 
-  let list = course === "all" ? [...VIDEOS.beginner, ...VIDEOS.options, ...VIDEOS.intraday] : (VIDEOS[course] || []);
+  let list = [];
+  if (course === "all") {
+    list = [...getAllVideos("beginner"), ...getAllVideos("options"), ...getAllVideos("intraday")];
+  } else {
+    list = getAllVideos(course);
+  }
 
   list.forEach(v => {
     const card = document.createElement("div");
