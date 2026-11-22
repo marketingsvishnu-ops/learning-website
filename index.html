@@ -253,7 +253,15 @@ function unlockVideos() {
   list.forEach(v => {
     const card = document.createElement("div");
     card.className = "video-card";
-    card.innerHTML = `<video controls><source src="${v.url}" type="video/mp4">Your browser does not support video.</video><div class="video-info"><h4>${v.title}</h4><p style="color:var(--muted); font-size:0.9rem;">${v.desc}</p></div>`;
+    const priceText = v.price ? `\u20b9${v.price}` : "Free";
+    card.innerHTML = `
+      <video controls><source src="${v.url}" type="video/mp4">Your browser does not support video.</video>
+      <div class="video-info">
+        <h4>${v.title}</h4>
+        <p style="color:var(--muted); font-size:0.9rem;">${v.desc || ""}</p>
+        <p style="margin-top:8px; font-weight:600; color:var(--primary);">${priceText}</p>
+      </div>
+    `;
     container.appendChild(card);
   });
 
