@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | TradeMaster Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1c;--card:#121a2b;--border:#1e2a40;--primary:#00d26a;--text:#fff;--muted:#a0aec0;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+header{background:rgba(10,15,28,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0}
+nav{display:flex;justify-content:space-between;align-items:center;height:70px}
+.logo{font-size:1.5rem;font-weight:800;color:var(--primary)}
+.logo span{color:#fff}
+.user-info{display:flex;align-items:center;gap:16px}
+.btn{background:transparent;border:1px solid var(--border);color:#fff;padding:10px 18px;border-radius:10px;cursor:pointer}
+.section{padding:40px 0}
+.section-title{font-size:2rem;font-weight:800;margin-bottom:8px}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;margin-top:32px}
+.video-card{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid var(--border)}
+.video-card video{width:100%;height:200px;background:#000}
+.video-info{padding:16px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">Trade<span>Master</span></div>
+      <div class="user-info">
+        <span id="welcome"></span>
+        <button class="btn" onclick="logout()">Logout</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <h1 class="section-title">My Videos</h1>
+    <p style="color:var(--muted)">Your enrolled course videos</p>
+    <div id="videoContainer" class="video-grid"></div>
+    <p id="noVideos" class="hidden" style="margin-top:40px;color:var(--muted)">No videos available yet. Admin will upload soon.</p>
+  </div>
+</section>
+
+<script>
+const uid = localStorage.getItem("tm_loggedin");
+if(!uid) window.location.href = "login.html";
+
+const users = JSON.parse(localStorage.getItem("tm_users") || "{}");
+const user = users[uid];
+document.getElementById("welcome").textContent = "Hi, " + (user?.name || uid);
+
+function logout(){
+  localStorage.removeItem("tm_loggedin");
+  window.location.href = "login.html";
+}
+
+function loadVideos(){
+  const allVideos = JSON.parse(localStorage.getItem("tm_videos") || "[]");
+  const userCourse = user?.course || "beginner";
+  const myVideos = allVideos.filter(v => v.course === userCourse || v.course === "all");
+  
+  const container = document.getElementById("videoContainer");
+  if(myVideos.length === 0){
+    document.getElementById("noVideos").classList.remove("hidden");
+    return;
+  }
+  
+  myVideos.forEach(v => {
+    const card = document.createElement("div");
+    card.className = "video-card";
+    card.innerHTML = `
+      <video controls><source src="${v.url}" type="video/mp4"></video>
+      <div class="video-info">
+        <h4>${v.title}</h4>
+        <p style="color:var(--muted);font-size:0.9rem">${v.desc || ""}</p>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+loadVideos();
+</script>
+</body>
+</html>

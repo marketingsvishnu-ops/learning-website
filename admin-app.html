@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | TradeMaster Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1c;--card:#121a2b;--border:#1e2a40;--primary:#00d26a;--danger:#ef4444;--text:#fff;--muted:#a0aec0;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.container{max-width:1000px;margin:0 auto;padding:40px 24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:24px}
+h1{margin-bottom:8px}
+h2{margin-bottom:16px}
+input,select,textarea{width:100%;padding:14px;border-radius:10px;border:1px solid var(--border);background:#0d1422;color:#fff;margin-bottom:14px}
+textarea{min-height:80px}
+.btn{background:var(--primary);color:#000;padding:12px 24px;border-radius:10px;font-weight:600;border:none;cursor:pointer}
+.btn-danger{background:var(--danger);color:#fff}
+.video-item{background:#0d1422;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.user-item{background:#0d1422;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Admin Panel</h1>
+  <p style="color:var(--muted);margin-bottom:32px">Manage videos and create student accounts</p>
+
+  <div class="card">
+    <h2>Add Video</h2>
+    <input type="text" id="vTitle" placeholder="Video Title">
+    <textarea id="vDesc" placeholder="Description"></textarea>
+    <input type="text" id="vUrl" placeholder="Video URL (MP4 link)">
+    <select id="vCourse">
+      <option value="beginner">Beginner</option>
+      <option value="options">Options</option>
+      <option value="intraday">Intraday</option>
+      <option value="all">All Courses</option>
+    </select>
+    <button class="btn" onclick="addVideo()">Add Video</button>
+  </div>
+
+  <div class="card">
+    <h2>Create Student Account</h2>
+    <input type="text" id="uName" placeholder="Student Name">
+    <select id="uCourse">
+      <option value="beginner">Beginner Course</option>
+      <option value="options">Options Course</option>
+      <option value="intraday">Intraday Course</option>
+    </select>
+    <button class="btn" onclick="createUser()">Create Account</button>
+    <p id="userCreated" style="margin-top:12px;color:var(--primary)"></p>
+  </div>
+
+  <div class="card">
+    <h2>All Videos</h2>
+    <div id="videoList"></div>
+  </div>
+
+  <div class="card">
+    <h2>All Students</h2>
+    <div id="userList"></div>
+  </div>
+</div>
+
+<script>
+const ADMIN_PASS = "admin123";
+if(prompt("Admin Password") !== ADMIN_PASS){
+  alert("Access Denied");
+  window.location.href = "login.html";
+}
+
+function getVideos(){ return JSON.parse(localStorage.getItem("tm_videos") || "[]"); }
+function getUsers(){ return JSON.parse(localStorage.getItem("tm_users") || "{}"); }
+
+function addVideo(){
+  const title = document.getElementById("vTitle").value.trim();
+  const desc = document.getElementById("vDesc").value.trim();
+  const url = document.getElementById("vUrl").value.trim();
+  const course = document.getElementById("vCourse").value;
+  if(!title || !url) return alert("Title and URL required");
+  
+  const videos = getVideos();
+  videos.push({ id: Date.now(), title, desc, url, course });
+  localStorage.setItem("tm_videos", JSON.stringify(videos));
+  document.getElementById("vTitle").value = "";
+  document.getElementById("vDesc").value = "";
+  document.getElementById("vUrl").value = "";
+  loadVideos();
+  alert("Video added");
+}
+
+function createUser(){
+  const name = document.getElementById("uName").value.trim();
+  const course = document.getElementById("uCourse").value;
+  if(!name) return alert("Name required");
+  
+  const uid = "TM" + Math.floor(1000 + Math.random() * 9000);
+  const pass = Math.random().toString(36).slice(-6);
+  
+  const users = getUsers();
+  users[uid] = { password: pass, name, course };
+  localStorage.setItem("tm_users", JSON.stringify(users));
+  
+  document.getElementById("userCreated").innerHTML = `
+    Account Created!<br>
+    <strong>User ID:</strong> ${uid}<br>
+    <strong>Password:</strong> ${pass}
+  `;
+  document.getElementById("uName").value = "";
+  loadUsers();
+}
+
+function loadVideos(){
+  const list = document.getElementById("videoList");
+  const videos = getVideos();
+  list.innerHTML = videos.map((v,i) => `
+    <div class="video-item">
+      <div><strong>${v.title}</strong> <span style="color:var(--muted)">(${v.course})</span></div>
+      <button class="btn btn-danger" onclick="deleteVideo(${i})">Delete</button>
+    </div>
+  `).join("") || "<p style='color:var(--muted)'>No videos</p>";
+}
+
+function loadUsers(){
+  const list = document.getElementById("userList");
+  const users = getUsers();
+  list.innerHTML = Object.entries(users).map(([uid,u]) => `
+    <div class="user-item">
+      <strong>${uid}</strong> \u2014 ${u.name} (${u.course})<br>
+      <span style="color:var(--muted);font-size:0.9rem">Pass: ${u.password}</span>
+    </div>
+  `).join("") || "<p style='color:var(--muted)'>No students</p>";
+}
+
+function deleteVideo(i){
+  if(!confirm("Delete?")) return;
+  const videos = getVideos();
+  videos.splice(i,1);
+  localStorage.setItem("tm_videos", JSON.stringify(videos));
+  loadVideos();
+}
+
+loadVideos();
+loadUsers();
+</script>
+</body>
+</html>
