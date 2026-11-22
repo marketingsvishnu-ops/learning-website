@@ -154,13 +154,19 @@ footer { border-top:1px solid var(--border); padding:60px 0; text-align:center; 
 <section class="section" style="background:#080e1a">
   <div class="container">
     <h2 class="section-title">Live Market</h2>
-    <p class="section-sub">Real-time price stream + TradingView chart</p>
-    <div style="text-align:center;margin-bottom:40px">
+    <p class="section-sub">Real-time charts & price stream</p>
+
+    <div style="text-align:center;margin-bottom:50px">
       <div style="font-size:1.2rem;color:var(--muted)">BTC/USDT</div>
       <div id="btcPrice" style="font-size:3rem;font-weight:900;color:var(--primary)">Loading...</div>
       <div id="btcChange" style="font-size:1.2rem"></div>
     </div>
-    <div id="tradingview_chart" style="height:520px;border-radius:16px;overflow:hidden"></div>
+
+    <h3 style="margin-bottom:16px;text-align:center">Bitcoin Chart</h3>
+    <div id="tradingview_btc" style="height:480px;border-radius:16px;overflow:hidden;margin-bottom:50px"></div>
+
+    <h3 style="margin-bottom:16px;text-align:center">Nifty 50 Chart</h3>
+    <div id="tradingview_nifty" style="height:480px;border-radius:16px;overflow:hidden"></div>
   </div>
 </section>
 
@@ -241,7 +247,7 @@ ws.onmessage = (event) => {
   document.getElementById("btcChange").style.color = change >= 0 ? "#00d26a" : "#ef4444";
 };
 
-// TradingView Chart
+// Bitcoin Chart
 new TradingView.widget({
   "autosize": true,
   "symbol": "BINANCE:BTCUSDT",
@@ -254,7 +260,23 @@ new TradingView.widget({
   "enable_publishing": false,
   "hide_side_toolbar": false,
   "allow_symbol_change": true,
-  "container_id": "tradingview_chart"
+  "container_id": "tradingview_btc"
+});
+
+// Nifty 50 Chart
+new TradingView.widget({
+  "autosize": true,
+  "symbol": "NSE:NIFTY",
+  "interval": "15",
+  "timezone": "Asia/Kolkata",
+  "theme": "dark",
+  "style": "1",
+  "locale": "en",
+  "toolbar_bg": "#121a2b",
+  "enable_publishing": false,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": true,
+  "container_id": "tradingview_nifty"
 });
 
 window.onload=()=>{const s=localStorage.getItem("tradeAccess");if(s&&VALID_CODES[s]){document.getElementById("accessCode").value=s;unlockVideos()}}
