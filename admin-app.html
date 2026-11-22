@@ -19,6 +19,7 @@ textarea{min-height:80px}
 .btn-danger{background:var(--danger);color:#fff}
 .video-item{background:#0d1422;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
 .user-item{background:#0d1422;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+.or{text-align:center;color:var(--muted);margin:16px 0;font-size:0.9rem}
 </style>
 </head>
 <body>
@@ -30,7 +31,14 @@ textarea{min-height:80px}
     <h2>Add Video</h2>
     <input type="text" id="vTitle" placeholder="Video Title">
     <textarea id="vDesc" placeholder="Description"></textarea>
-    <input type="text" id="vUrl" placeholder="Video URL (MP4 link)">
+    
+    <label style="display:block;margin-bottom:8px;color:var(--muted)">Upload from Desktop</label>
+    <input type="file" id="vFile" accept="video/*" style="padding:10px">
+    
+    <div class="or">— OR —</div>
+    
+    <input type="text" id="vUrl" placeholder="Or paste Video URL (MP4 link)">
+    
     <select id="vCourse">
       <option value="beginner">Beginner</option>
       <option value="options">Options</option>
@@ -38,6 +46,7 @@ textarea{min-height:80px}
       <option value="all">All Courses</option>
     </select>
     <button class="btn" onclick="addVideo()">Add Video</button>
+    <p id="uploadStatus" style="margin-top:12px;color:var(--primary)"></p>
   </div>
 
   <div class="card">
@@ -76,18 +85,43 @@ function getUsers(){ return JSON.parse(localStorage.getItem("tm_users") || "{}")
 function addVideo(){
   const title = document.getElementById("vTitle").value.trim();
   const desc = document.getElementById("vDesc").value.trim();
-  const url = document.getElementById("vUrl").value.trim();
+  const urlInput = document.getElementById("vUrl").value.trim();
+  const fileInput = document.getElementById("vFile");
   const course = document.getElementById("vCourse").value;
-  if(!title || !url) return alert("Title and URL required");
-  
+  const status = document.getElementById("uploadStatus");
+
+  if(!title) return alert("Title is required");
+
+  if(fileInput.files.length > 0){
+    const file = fileInput.files[0];
+    if(file.size > 50 * 1024 * 1024){
+      alert("File too large. Keep under 50MB for browser storage.");
+      return;
+    }
+    status.textContent = "Reading file...";
+    const reader = new FileReader();
+    reader.onload = function(e){
+      saveVideo(title, desc, e.target.result, course);
+      status.textContent = "Video uploaded from desktop!";
+      fileInput.value = "";
+    };
+    reader.readAsDataURL(file);
+  } else if(urlInput){
+    saveVideo(title, desc, urlInput, course);
+    status.textContent = "Video added from URL";
+    document.getElementById("vUrl").value = "";
+  } else {
+    alert("Please upload a file or enter a URL");
+  }
+}
+
+function saveVideo(title, desc, url, course){
   const videos = getVideos();
   videos.push({ id: Date.now(), title, desc, url, course });
   localStorage.setItem("tm_videos", JSON.stringify(videos));
   document.getElementById("vTitle").value = "";
   document.getElementById("vDesc").value = "";
-  document.getElementById("vUrl").value = "";
   loadVideos();
-  alert("Video added");
 }
 
 function createUser(){
