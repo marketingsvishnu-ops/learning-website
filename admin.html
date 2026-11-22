@@ -48,7 +48,7 @@ textarea { min-height:80px; resize:vertical; }
 
 <div id="adminPanel" class="container hidden">
   <h1>Admin Panel</h1>
-  <p class="subtitle">Add and manage course videos with individual pricing.</p>
+  <p class="subtitle">Add and manage course videos with INR & USDT pricing.</p>
 
   <div class="card">
     <h2>Add New Video</h2>
@@ -56,6 +56,7 @@ textarea { min-height:80px; resize:vertical; }
     <textarea id="vDesc" placeholder="Short description"></textarea>
     <input type="text" id="vUrl" placeholder="Video URL (MP4 direct link or YouTube embed)" />
     <input type="number" id="vPrice" placeholder="Price in \u20b9 (e.g. 499)" min="0" />
+    <input type="number" id="vPriceUsdt" placeholder="Price in USDT (e.g. 6)" min="0" step="0.01" />
     <select id="vCourse">
       <option value="beginner">Beginner Trading Masterclass</option>
       <option value="options">Options Trading Pro</option>
@@ -105,6 +106,7 @@ function addVideo() {
   const url = document.getElementById("vUrl").value.trim();
   const course = document.getElementById("vCourse").value;
   const price = parseInt(document.getElementById("vPrice").value) || 0;
+  const priceUsdt = parseFloat(document.getElementById("vPriceUsdt").value) || 0;
 
   if (!title || !url) {
     alert("Title and URL are required");
@@ -113,15 +115,16 @@ function addVideo() {
 
   const data = getVideos();
   if (!data[course]) data[course] = [];
-  data[course].push({ title, desc, url, price, id: Date.now() });
+  data[course].push({ title, desc, url, price, priceUsdt, id: Date.now() });
   saveVideos(data);
 
   document.getElementById("vTitle").value = "";
   document.getElementById("vDesc").value = "";
   document.getElementById("vUrl").value = "";
   document.getElementById("vPrice").value = "";
+  document.getElementById("vPriceUsdt").value = "";
   loadVideos();
-  alert("Video added with price \u20b9" + price);
+  alert("Video added with price \u20b9" + price + " / " + priceUsdt + " USDT");
 }
 
 function loadVideos() {
@@ -143,6 +146,7 @@ function loadVideos() {
           <span style="color:var(--muted); font-size:0.9rem;">${v.desc || "No description"}</span><br>
           <span class="badge">${courseNames[course] || course}</span>
           <span class="badge" style="background:#f59e0b; margin-left:8px;">\u20b9${v.price || 0}</span>
+          <span class="badge" style="background:#3b82f6; margin-left:8px;">${v.priceUsdt || 0} USDT</span>
         </div>
         <button class="btn btn-danger" onclick="deleteVideo('${course}', ${index})">Delete</button>
       `;
