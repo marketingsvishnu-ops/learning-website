@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TradeMaster Academy | Trading Sikho</title>
+<title>TradeMaster Academy | Learn Trading</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -70,20 +70,20 @@ footer { border-top:1px solid var(--border); padding:40px 0; text-align:center; 
 
 <section class="hero">
   <div class="container">
-    <h1>Trading Sikho <span>Professionally</span></h1>
-    <p>Stock Market, Options, Intraday & Swing Trading ke complete courses. Sirf unke liye jo serious hain.</p>
-    <a href="#courses" class="btn">Courses Dekho</a>
+    <h1>Learn Trading <span>Professionally</span></h1>
+    <p>Complete courses on Stock Market, Options, Intraday & Swing Trading. Built for serious traders.</p>
+    <a href="#courses" class="btn">View Courses</a>
   </div>
 </section>
 
 <section id="courses" class="section">
   <div class="container">
     <h2 class="section-title">Our Trading Courses</h2>
-    <p class="section-sub">Payment karke class book karo, phir access code se videos unlock karo.</p>
+    <p class="section-sub">Pay to book your class, then unlock videos with your access code.</p>
     <div class="grid">
       <div class="card">
         <h3>Beginner Trading Masterclass</h3>
-        <p>Stock market basics se leke pehla trade tak.</p>
+        <p>From stock market basics to your first trade.</p>
         <div class="price">\u20b91,999 <span>/ one-time</span></div>
         <ul class="features">
           <li>Market Structure & Charts</li>
@@ -95,7 +95,7 @@ footer { border-top:1px solid var(--border); padding:40px 0; text-align:center; 
       </div>
       <div class="card">
         <h3>Options Trading Pro</h3>
-        <p>Call, Put, Strategies aur live market analysis.</p>
+        <p>Call, Put, Strategies and live market analysis.</p>
         <div class="price">\u20b94,999 <span>/ one-time</span></div>
         <ul class="features">
           <li>Options Greeks</li>
@@ -107,7 +107,7 @@ footer { border-top:1px solid var(--border); padding:40px 0; text-align:center; 
       </div>
       <div class="card">
         <h3>Intraday & Scalping</h3>
-        <p>Fast money making techniques with live examples.</p>
+        <p>Fast money-making techniques with live examples.</p>
         <div class="price">\u20b93,499 <span>/ one-time</span></div>
         <ul class="features">
           <li>Price Action</li>
@@ -124,7 +124,7 @@ footer { border-top:1px solid var(--border); padding:40px 0; text-align:center; 
 <section id="access" class="section">
   <div class="container">
     <h2 class="section-title">Access Your Videos</h2>
-    <p class="section-sub">Payment ke baad jo access code milega, yahan daalo. Payment success pe auto unlock.</p>
+    <p class="section-sub">Enter the access code you receive after payment. Videos unlock automatically on successful payment.</p>
     <div class="access-box">
       <h3>Enter Access Code</h3>
       <input type="text" id="accessCode" placeholder="e.g. TRADE-XXXX" />
@@ -137,7 +137,7 @@ footer { border-top:1px solid var(--border); padding:40px 0; text-align:center; 
 <section id="videos" class="section hidden">
   <div class="container">
     <h2 class="section-title">Your Course Videos</h2>
-    <p class="section-sub">Payment complete hone ke baad hi yeh videos dikhte hain.</p>
+    <p class="section-sub">These videos are only visible after successful payment.</p>
     <div id="videoContainer" class="video-grid"></div>
   </div>
 </section>
@@ -145,7 +145,7 @@ footer { border-top:1px solid var(--border); padding:40px 0; text-align:center; 
 <footer>
   <div class="container">
     <p>\u00a9 2026 TradeMaster Academy. All rights reserved.</p>
-    <p style="margin-top:8px; font-size:0.9rem;">Videos sirf paid students ke liye. Unauthorized sharing prohibited.</p>
+    <p style="margin-top:8px; font-size:0.9rem;">Videos are for paid students only. Unauthorized sharing is prohibited.</p>
   </div>
 </footer>
 
@@ -168,11 +168,11 @@ const VALID_CODES = {
 
 const VIDEOS = {
   beginner: [
-    { title: "Introduction to Stock Market", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Market kaise kaam karta hai" },
-    { title: "How to Read Charts", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Candlestick aur patterns" }
+    { title: "Introduction to Stock Market", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "How the market works" },
+    { title: "How to Read Charts", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Candlesticks and patterns" }
   ],
   options: [
-    { title: "What are Options?", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Call aur Put samjho" },
+    { title: "What are Options?", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Understand Call and Put" },
     { title: "Basic Strategies", url: "https://www.w3schools.com/html/mov_bbb.mp4", desc: "Covered Call, Protective Put" }
   ],
   intraday: [
@@ -186,7 +186,7 @@ function showPayment(courseKey) {
   if (!course) return;
 
   if (RAZORPAY_KEY_ID.includes("YOUR_KEY")) {
-    alert("Razorpay Key ID set nahi hai.\n\n1. Razorpay Dashboard se Key ID copy karo\n2. index.html mein RAZORPAY_KEY_ID update karo\n\nAbhi demo code use kar sakte ho:\n" + course.code);
+    alert("Razorpay Key ID is not set.\n\n1. Copy Key ID from Razorpay Dashboard\n2. Update RAZORPAY_KEY_ID in index.html\n\nYou can use this demo code for now:\n" + course.code);
     document.getElementById("accessCode").value = course.code;
     return;
   }
@@ -199,7 +199,7 @@ function showPayment(courseKey) {
     description: course.name,
     image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
     handler: function (response) {
-      alert("Payment Successful!\n\nPayment ID: " + response.razorpay_payment_id + "\n\nAccess Code: " + course.code + "\n\nYeh code save kar lo.");
+      alert("Payment Successful!\n\nPayment ID: " + response.razorpay_payment_id + "\n\nAccess Code: " + course.code + "\n\nPlease save this code.");
       document.getElementById("accessCode").value = course.code;
       unlockVideos();
     },
@@ -221,12 +221,12 @@ function unlockVideos() {
   const course = VALID_CODES[code];
 
   if (!course) {
-    msg.textContent = "Invalid code. Payment ke baad sahi code daalo.";
+    msg.textContent = "Invalid code. Please enter the correct code after payment.";
     msg.style.color = "#ef4444";
     return;
   }
 
-  msg.textContent = "Access granted! Videos load ho rahe hain...";
+  msg.textContent = "Access granted! Loading your videos...";
   msg.style.color = "#22c55e";
 
   document.getElementById("videos").classList.remove("hidden");
