@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | TradeMaster Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e17;
+  --card: #111827;
+  --border: #1f2937;
+  --primary: #22c55e;
+  --primary-dark: #16a34a;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --danger: #ef4444;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height:1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:32px; margin-bottom:24px; }
+h1 { font-size:2rem; margin-bottom:8px; }
+h2 { font-size:1.4rem; margin-bottom:16px; }
+.subtitle { color:var(--muted); margin-bottom:24px; }
+input, select, textarea { width:100%; padding:12px 14px; border-radius:8px; border:1px solid var(--border); background:#0f172a; color:var(--text); font-size:1rem; margin-bottom:16px; }
+textarea { min-height:80px; resize:vertical; }
+.btn { background: var(--primary); color:#000; padding:12px 24px; border-radius:8px; font-weight:600; border:none; cursor:pointer; }
+.btn:hover { background: var(--primary-dark); }
+.btn-danger { background: var(--danger); color:#fff; }
+.btn-outline { background:transparent; border:1px solid var(--border); color:var(--text); }
+.login-box { max-width:400px; margin:100px auto; }
+.video-item { background:#0f172a; border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; }
+.video-item div { flex:1; }
+.badge { background:var(--primary); color:#000; padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600; }
+.hidden { display:none; }
+</style>
+</head>
+<body>
+<div id="loginScreen" class="login-box card">
+  <h1>Admin Login</h1>
+  <p class="subtitle">TradeMaster Academy</p>
+  <input type="password" id="adminPass" placeholder="Enter admin password" />
+  <button class="btn" onclick="login()">Login</button>
+  <p id="loginMsg" style="color:var(--danger); margin-top:12px;"></p>
+  <p style="margin-top:20px; color:var(--muted); font-size:0.9rem;">Default password: <strong>admin123</strong></p>
+</div>
+
+<div id="adminPanel" class="container hidden">
+  <h1>Admin Panel</h1>
+  <p class="subtitle">Add and manage course videos. Videos appear on the main site after adding.</p>
+
+  <div class="card">
+    <h2>Add New Video</h2>
+    <input type="text" id="vTitle" placeholder="Video Title" />
+    <textarea id="vDesc" placeholder="Short description"></textarea>
+    <input type="text" id="vUrl" placeholder="Video URL (MP4 direct link or YouTube embed)" />
+    <select id="vCourse">
+      <option value="beginner">Beginner Trading Masterclass</option>
+      <option value="options">Options Trading Pro</option>
+      <option value="intraday">Intraday & Scalping</option>
+    </select>
+    <button class="btn" onclick="addVideo()">Add Video</button>
+  </div>
+
+  <div class="card">
+    <h2>Current Videos</h2>
+    <div id="videoList"></div>
+    <button class="btn btn-outline" onclick="exportData()" style="margin-top:16px;">Export Data (for backup)</button>
+    <button class="btn btn-danger" onclick="clearAll()" style="margin-left:10px;">Clear All Videos</button>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <a href="index.html" class="btn btn-outline">← Back to Website</a>
+  </div>
+</div>
+
+<script>
+const ADMIN_PASSWORD = "admin123";
+const STORAGE_KEY = "trademaster_videos";
+
+function login() {
+  const pass = document.getElementById("adminPass").value;
+  if (pass === ADMIN_PASSWORD) {
+    document.getElementById("loginScreen").classList.add("hidden");
+    document.getElementById("adminPanel").classList.remove("hidden");
+    loadVideos();
+  } else {
+    document.getElementById("loginMsg").textContent = "Wrong password";
+  }
+}
+
+function getVideos() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+}
+
+function saveVideos(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function addVideo() {
+  const title = document.getElementById("vTitle").value.trim();
+  const desc = document.getElementById("vDesc").value.trim();
+  const url = document.getElementById("vUrl").value.trim();
+  const course = document.getElementById("vCourse").value;
+
+  if (!title || !url) {
+    alert("Title and URL are required");
+    return;
+  }
+
+  const data = getVideos();
+  if (!data[course]) data[course] = [];
+  data[course].push({ title, desc, url, id: Date.now() });
+  saveVideos(data);
+
+  document.getElementById("vTitle").value = "";
+  document.getElementById("vDesc").value = "";
+  document.getElementById("vUrl").value = "";
+  loadVideos();
+  alert("Video added! It will appear on the main site for users who have access to this course.");
+}
+
+function loadVideos() {
+  const data = getVideos();
+  const list = document.getElementById("videoList");
+  list.innerHTML = "";
+
+  const courseNames = { beginner: "Beginner", options: "Options", intraday: "Intraday" };
+  let hasVideos = false;
+
+  for (const [course, videos] of Object.entries(data)) {
+    videos.forEach((v, index) => {
+      hasVideos = true;
+      const item = document.createElement("div");
+      item.className = "video-item";
+      item.innerHTML = `
+        <div>
+          <strong>${v.title}</strong><br>
+          <span style="color:var(--muted); font-size:0.9rem;">${v.desc || "No description"}</span><br>
+          <span class="badge">${courseNames[course] || course}</span>
+        </div>
+        <button class="btn btn-danger" onclick="deleteVideo('${course}', ${index})">Delete</button>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  if (!hasVideos) {
+    list.innerHTML = "<p style='color:var(--muted);'>No videos added yet.</p>";
+  }
+}
+
+function deleteVideo(course, index) {
+  if (!confirm("Delete this video?")) return;
+  const data = getVideos();
+  data[course].splice(index, 1);
+  if (data[course].length === 0) delete data[course];
+  saveVideos(data);
+  loadVideos();
+}
+
+function clearAll() {
+  if (!confirm("Delete all videos? This cannot be undone.")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  loadVideos();
+}
+
+function exportData() {
+  const data = getVideos();
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "videos-backup.json";
+  a.click();
+}
+</script>
+</body>
+</html>
